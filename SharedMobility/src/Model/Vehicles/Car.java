@@ -2,9 +2,18 @@ package Model.Vehicles;
 
 import Model.DrivingLicense;
 import Model.Vehicle;
+import lombok.Getter;
+import lombok.NonNull;
 
+import java.util.UUID;
+@Getter
 public class Car extends Vehicle {
     private String plate;
     private DrivingLicense drivingLicense;
 
+    public Car(@NonNull UUID ID, @NonNull String geo, @NonNull boolean isAvailable, double rateXMinute,String plate,DrivingLicense drivingLicense) {
+        super(ID, geo, isAvailable, rateXMinute);
+        this.plate = plate;
+        this.drivingLicense = drivingLicense;
+    }
 }

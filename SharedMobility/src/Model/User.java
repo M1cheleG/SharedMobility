@@ -29,7 +29,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.CF = CF;
         this.ID = ID;
-        DrivingLicenses = drivingLicenses;
+        this.DrivingLicenses = drivingLicenses;     //va bene?
         this.helmet = helmet;
     }
 }
