@@ -10,10 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeMap;
-import java.util.UUID;
+import java.util.*;
 
 public class DaoUserCsv implements DaoUser {
 
@@ -38,8 +35,14 @@ public class DaoUserCsv implements DaoUser {
 
             while ((line= br.readLine())!=null){
                 String[] values =line.split(",");
+                String temp= values[5].replaceAll("[\\[\\] ]", "");
+                String[] licenseValue = temp.split(":");
+                List<DrivingLicense> drivingLicenses= new ArrayList<>();
+                for (int i = 0; i < licenseValue.length; i++) {
+                        drivingLicenses.add(DrivingLicense.valueOf(licenseValue[i]));
+                }
                 this.idsToUsers.put(UUID.fromString(values[0]),new User(UUID.fromString(values[0]),values[1],values[2], LocalDate.parse(values[3]),values[4],
-                        List.of(DrivingLicense.valueOf(values[5])),Boolean.getBoolean(values[6]),Double.valueOf(values[7])));
+                        drivingLicenses,Boolean.getBoolean(values[6]),Double.valueOf(values[7])));
             }
 
         }catch (IOException e){
@@ -84,13 +87,14 @@ public class DaoUserCsv implements DaoUser {
     private boolean save() {
         try (BufferedWriter bw = Files.newBufferedWriter(this.usersCsv)) {
             for (User user : idsToUsers.values()) {
+                String userDriveLicenses= user.getDrivingLicenses().toString().replaceAll(",", ":");
                 List<String> values = Arrays.asList(
                         user.getID().toString(),
                         user.getName(),
                         user.getSurname(),
                         user.getDateOfBirth().toString(),
                         user.getCF(),
-                        user.getDrivingLicenses().toString(),
+                        userDriveLicenses,
                         Boolean.toString(user.isHelmet()),
                         Double.toString(user.getCredit())
                         );
