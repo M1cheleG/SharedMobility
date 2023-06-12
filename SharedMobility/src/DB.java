@@ -15,11 +15,10 @@ public class DB {
 
     public static DB getInstance(){
         if(Internalinstance == null){
-            synchronized (DB.class){
                 if(Internalinstance == null){
                     Internalinstance = new DB();
                 }
-            }
+
         }
         return Internalinstance;
     }
