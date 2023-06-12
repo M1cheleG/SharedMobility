@@ -36,6 +36,17 @@ public class User {
         this.credit = credit;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", CF='" + CF + '\'' +
+                ", DrivingLicenses=" + DrivingLicenses +
+                ", helmet=" + helmet +
+                ", credit=" + credit +
+                '}';
+    }
 }

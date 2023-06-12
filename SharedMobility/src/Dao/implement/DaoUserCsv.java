@@ -34,9 +34,9 @@ public class DaoUserCsv implements DaoUser {
             String line;
 
             while ((line= br.readLine())!=null){
-                String[] values =line.split(",");
+                String[] values =line.split(":");
                 String temp= values[5].replaceAll("[\\[\\] ]", "");
-                String[] licenseValue = temp.split(":");
+                String[] licenseValue = temp.split(",");
                 List<DrivingLicense> drivingLicenses= new ArrayList<>();
                 for (int i = 0; i < licenseValue.length; i++) {
                         drivingLicenses.add(DrivingLicense.valueOf(licenseValue[i]));
@@ -75,31 +75,30 @@ public class DaoUserCsv implements DaoUser {
 
     @Override
     public User get(UUID id) {
-        return null;
+        return idsToUsers.get(id);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return new ArrayList<>(idsToUsers.values());
     }
 
 
     private boolean save() {
         try (BufferedWriter bw = Files.newBufferedWriter(this.usersCsv)) {
             for (User user : idsToUsers.values()) {
-                String userDriveLicenses= user.getDrivingLicenses().toString().replaceAll(",", ":");
                 List<String> values = Arrays.asList(
                         user.getID().toString(),
                         user.getName(),
                         user.getSurname(),
                         user.getDateOfBirth().toString(),
                         user.getCF(),
-                        userDriveLicenses,
+                        user.getDrivingLicenses().toString(),
                         Boolean.toString(user.isHelmet()),
                         Double.toString(user.getCredit())
                         );
 
-                bw.write(String.join(",", values));
+                bw.write(String.join(":", values));
                 bw.newLine();
             }
         }
