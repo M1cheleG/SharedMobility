@@ -3,6 +3,7 @@ package Model;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.Collection;
 import java.util.UUID;
 @Getter
 public abstract class Vehicle {
@@ -21,5 +22,6 @@ public abstract class Vehicle {
         this.isAvailable = isAvailable;
         this.rateXMinute = rateXMinute;
     }
+
 
 }
