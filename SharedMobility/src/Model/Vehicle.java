@@ -15,10 +15,11 @@ public abstract class Vehicle {
     private int fuelStatus = 100;
     private double rateXMinute;
 
-    public Vehicle(@NonNull UUID ID, @NonNull String geo, @NonNull boolean isAvailable, double rateXMinute) {
+    protected Vehicle(@NonNull UUID ID, @NonNull String geo, @NonNull boolean isAvailable, double rateXMinute) {
         this.ID = ID;
         this.geo = geo;
         this.isAvailable = isAvailable;
         this.rateXMinute = rateXMinute;
     }
+
 }
