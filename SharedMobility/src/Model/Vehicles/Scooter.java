@@ -15,8 +15,8 @@ public class Scooter extends Vehicle {
 
     private Helmet helmet;
 
-    public Scooter(@NonNull UUID ID, @NonNull String geo, @NonNull boolean isAvailable, double rateXMinute,Helmet helmet) {
-        super(ID, geo, isAvailable, rateXMinute);
+    public Scooter(@NonNull UUID ID, @NonNull String geo, double rateXMinute,Helmet helmet) {
+        super(ID, geo, rateXMinute);
         this.helmet = helmet;
     }
     /*  public static class ScooterBuilder{

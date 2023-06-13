@@ -12,8 +12,8 @@ import java.util.UUID;
 public class Bicycle extends Vehicle {
     private Helmet helmet;
 
-    public Bicycle(@NonNull UUID ID, @NonNull String geo, @NonNull boolean isAvailable, double rateXMinute,Helmet helmet) {
-        super(ID, geo, isAvailable, rateXMinute);
+    public Bicycle(@NonNull UUID ID, @NonNull String geo, double rateXMinute,Helmet helmet) {
+        super(ID, geo, rateXMinute);
         this.helmet = helmet;
     }
 }

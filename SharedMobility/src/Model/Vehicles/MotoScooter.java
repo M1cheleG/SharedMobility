@@ -14,8 +14,8 @@ public class MotoScooter extends Vehicle {
     private DrivingLicense drivingLicense;
 
 
-    protected MotoScooter(@NonNull UUID ID, @NonNull String geo, @NonNull boolean isAvailable, double rateXMinute,String plate,DrivingLicense drivingLicense) {
-        super(ID, geo, isAvailable, rateXMinute);
+    protected MotoScooter(@NonNull UUID ID, @NonNull String geo, double rateXMinute,String plate,DrivingLicense drivingLicense) {
+        super(ID, geo, rateXMinute);
         this.plate = plate;
         this.drivingLicense = drivingLicense;
     }
