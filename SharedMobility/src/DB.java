@@ -4,6 +4,7 @@ import Dao.implement.DaoUserCsv;
 import Dao.implement.DaoVehicleCsv;
 import Model.User;
 import Model.Vehicle;
+import lombok.Getter;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 //DB con Singleton
+@Getter
 public class DB {
     private static DB Internalinstance;
     private List<User> user;
@@ -22,7 +24,7 @@ public class DB {
         user = new ArrayList<>();
         vehicle = new ArrayList<>();
         userDao = new DaoUserCsv(Paths.get("SharedMobility","src","Dao","implement","users.csv"));
-        vehicleDao = new DaoVehicleCsv(Paths.get("ShareMobility","src", "Dao", "implement", "vehicle.csv"));
+        vehicleDao = new DaoVehicleCsv(Paths.get("SharedMobility","src", "Dao", "implement", "vehicle.csv"));
     }
 
     public static DB getInstance(){

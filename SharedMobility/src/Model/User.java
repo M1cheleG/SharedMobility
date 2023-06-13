@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 public class User {
 
-    @NonNull
+
     private UUID ID;
     @NonNull
     private String name;
@@ -26,7 +26,7 @@ public class User {
     private boolean helmet;
     private double credit = 0;
 
-    public User(@NonNull UUID ID, @NonNull String name, @NonNull String surname, @NonNull LocalDate dateOfBirth,
+    public User(UUID ID, @NonNull String name, @NonNull String surname, @NonNull LocalDate dateOfBirth,
                 @NonNull String CF,  List<DrivingLicense> drivingLicenses, boolean helmet, double credit) {
         this.name = name;
         this.surname = surname;

@@ -20,8 +20,8 @@ public class MotoScooter extends Vehicle {
         this.drivingLicense = drivingLicense;
     }
 
-    public MotoScooter(@NonNull UUID ID, @NonNull String geo, UUID userID, double rateXMinute, @NonNull String plate, @NonNull DrivingLicense drivingLicense) {
-        super(ID, geo, userID, rateXMinute);
+    public MotoScooter(@NonNull UUID ID, @NonNull String geo, String userID, int fuelStatus, double rateXMinute, @NonNull String plate, @NonNull DrivingLicense drivingLicense) {
+        super(ID, geo, userID, fuelStatus, rateXMinute);
         this.plate = plate;
         this.drivingLicense = drivingLicense;
     }

@@ -6,12 +6,16 @@ import java.util.List;
 public class SharedMobility {
     private DB db;
 
-    public SharedMobility(DB db) {
-        this.db = db;
+    public SharedMobility() {
+        db= DB.getInstance();
     }
 
     public void signinUser(User user) {
         db.addUser(user);
+    }
+
+    public void addVehicle(Vehicle vehicle){
+        db.addVehicle(vehicle);
     }
 
     public void addCreditUser(User user,int credit){
@@ -114,6 +118,10 @@ public class SharedMobility {
         db.updateVehicle(vehicle);
 
         System.out.println("Veicolo restituito con successo.");
+    }
+
+    public List<Vehicle> getVehicles(){
+        return db.getAllVehicles();
     }
 
 }
