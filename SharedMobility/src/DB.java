@@ -22,7 +22,7 @@ public class DB {
         user = new ArrayList<>();
         vehicle = new ArrayList<>();
         userDao = new DaoUserCsv(Paths.get("SharedMobility","src","Dao","implement","users.csv"));
-        vehicleDao = new DaoVehicleCsv(Paths.get("ShareMobility"),"src", "Dao", "implement", "vehicle.csv");
+        vehicleDao = new DaoVehicleCsv(Paths.get("ShareMobility","src", "Dao", "implement", "vehicle.csv"));
     }
 
     public static DB getInstance(){
