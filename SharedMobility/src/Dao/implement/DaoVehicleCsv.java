@@ -1,10 +1,10 @@
 package Dao.implement;
 
 import Dao.DaoVehicle;
-import Model.User;
+import Model.DrivingLicense;
+import Model.Helmet;
 import Model.Vehicle;
 import Model.Vehicles.*;
-import com.sun.source.tree.Tree;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -36,11 +36,21 @@ public class DaoVehicleCsv implements DaoVehicle {
 
         try (BufferedReader br =Files.newBufferedReader(vehicleCsv)){
             String line;
-
             while ((line= br.readLine())!=null) {
-
-
-
+                String[] values =line.split(":");
+                Vehicle vehicle=null;
+                if(values[5]=="Bicycle"){
+                    vehicle= new Bicycle(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]), Helmet.valueOf(values[5]));
+                }else if(values[5]=="Car"){
+                    vehicle= new Car(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]),values[5], DrivingLicense.valueOf(values[6]));
+                }else if(values[5]=="MotoScooter") {
+                    vehicle= new MotoScooter(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]),values[5], DrivingLicense.valueOf(values[6]));
+                } else if (values[5]=="Scooter") {
+                    vehicle= new Scooter(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]), Helmet.valueOf(values[5]));
+                } else{
+                    vehicle= new Van(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]),values[5], DrivingLicense.valueOf(values[6]));
+                }
+                this.idsToVehicle.put(UUID.fromString(values[1]),vehicle);
             }
 
             }catch (IOException e){
@@ -69,26 +79,39 @@ public class DaoVehicleCsv implements DaoVehicle {
         return null;
     }
 
+    @Override
+    public List<Vehicle> getAll() {
+        return null;
+    }
+
     public boolean save(){
         try (BufferedWriter bw = Files.newBufferedWriter(this.vehicleCsv)) {
             for (Vehicle vehicle : idsToVehicle.values()) {
                 List<String> values = Arrays.asList(
                         vehicle.getID().toString(),
                         vehicle.getGeo(),
-                        Integer.toString(vehicle.getFuelStatus())
-                        );
-
+                        vehicle.getUserID().toString(),
+                        Integer.toString(vehicle.getFuelStatus()),
+                        Double.toString(vehicle.getRateXMinute()));
                 if(vehicle instanceof Bicycle){
-                }else if(vehicle instanceof Car){
+                    values.add("Bicycle");
+                    values.add(((Bicycle) vehicle).getHelmet().toString());
+                }else if(vehicle instanceof Car) {
+                    values.add("Car");
+                    values.add(((Car) vehicle).getPlate());
+                    values.add(String.valueOf(((Car) vehicle).getDrivingLicense()));
                 }else if(vehicle instanceof MotoScooter) {
+                    values.add("MotoScooter");
+                    values.add(((MotoScooter) vehicle).getPlate());
+                    values.add(String.valueOf(((MotoScooter) vehicle).getDrivingLicense()));
                 } else if (vehicle instanceof Scooter) {
+                    values.add("Scooter");
+                    values.add(((Scooter) vehicle).getHelmet().toString());
                 } else if (vehicle instanceof Van) {
-
+                    values.add("Van");
+                    values.add(((Van) vehicle).getPlate());
+                    values.add(String.valueOf(((Van) vehicle).getDrivingLicense()));
                 }
-
-
-
-
                 bw.write(String.join(":", values));
                 bw.newLine();
             }
