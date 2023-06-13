@@ -14,14 +14,32 @@ public class SharedMobility {
         db.addUser(user);
     }
 
+    public void addCreditUser(User user,int credit){
+        user.setCredit(user.getCredit()+credit);
+        db.updateUser(user);
+    }
+
     public List<Vehicle> searchVehicle() {
         return db.getAvailableVehicles();
     }
 
-    public void rentVehicle(Vehicle vehicle, User user) {
+    public void rentVehicle(Vehicle vehicle, User user,int minute) {
+
+        //Controllo del tempo
+        if(minute<=5){
+            System.out.println("Tempo non sufficente");
+            return;
+        }
+
         // Controllo se il veicolo è disponibile
         if (vehicle.getUserID() != null) {
             System.out.println("Il veicolo non è disponibile.");
+            return;
+        }
+
+        //Controllo del saldo
+        if((vehicle.getRateXMinute()*minute)>user.getCredit()){
+            System.out.println("Credito non sufficente");
             return;
         }
 
@@ -63,7 +81,9 @@ public class SharedMobility {
 
         // Veicolo disponibile e utente idoneo, procedi con il noleggio
         vehicle.setUserID(user.getID());
+        user.setCredit((user.getCredit()-(vehicle.getRateXMinute()*minute)));
         db.updateVehicle(vehicle);
+        db.updateUser(user);
         System.out.println("Veicolo affittato con successo.");
 
     }
