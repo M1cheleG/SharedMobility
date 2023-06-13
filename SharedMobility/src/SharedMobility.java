@@ -66,10 +66,6 @@ public class SharedMobility {
         db.updateVehicle(vehicle);
         System.out.println("Veicolo affittato con successo.");
 
-
-        vehicle.setUserID(user.getID());
-        db.updateVehicle(vehicle);
-        System.out.println("Veicolo affittato con successo.");
     }
 
     public void returnVehicle(Vehicle vehicle) {
