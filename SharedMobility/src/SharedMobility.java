@@ -5,16 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SharedMobility {
-    private List<User> users;
-    private List<Vehicle> vehicles;
+    private DB database;
 
-    public SharedMobility(List<User> users, List<Vehicle> vehicles) {
-        this.users = users;
-        this.vehicles = vehicles;
+    public SharedMobility(DB database) {
+        this.database = database;
     }
 
     public void signinUser(User user) {
-        users.add(user);
+        database.addUser(user);
     }
 
     public List<Vehicle> searchVehicle() {
