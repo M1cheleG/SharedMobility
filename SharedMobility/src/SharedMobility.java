@@ -1,13 +1,14 @@
-package Model;
+
+import Model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShareMobility {
+public class SharedMobility {
     private List<User> users;
     private List<Vehicle> vehicles;
 
-    public ShareMobility(List<User> users, List<Vehicle> vehicles) {
+    public SharedMobility(List<User> users, List<Vehicle> vehicles) {
         this.users = users;
         this.vehicles = vehicles;
     }
@@ -21,10 +22,10 @@ public class ShareMobility {
         return null;
     }
 
-    public void rentVehicle(Vehicle vehicle, User user) {
+   /* public void rentVehicle(Vehicle vehicle, User user) {
         if (vehicle.isAvailable()) {
             vehicle.setAvailable(false);
-            vehicle.getUsersWhoRented().add(user);
+            //vehicle.getUsersWhoRented().add(user);
         } else {
             System.out.println("Il veicolo non è disponibile per l'affitto.");
         }
@@ -37,5 +38,6 @@ public class ShareMobility {
         } else {
             System.out.println("L'utente non ha affittato questo veicolo.");
         }
-    }
+    } */
+
 }

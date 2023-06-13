@@ -8,7 +8,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.UUID;
-@Builder
+//@Builder
 @Getter
 @Setter
 public class Scooter extends Vehicle {

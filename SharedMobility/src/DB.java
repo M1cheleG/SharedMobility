@@ -15,7 +15,10 @@ public class DB {
 
     public static DB getInstance(){
         if(Internalinstance == null){
-            Internalinstance = new DB();
+                if(Internalinstance == null){
+                    Internalinstance = new DB();
+                }
+
         }
         return Internalinstance;
     }
