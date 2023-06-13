@@ -16,4 +16,9 @@ public class Bicycle extends Vehicle {
         super(ID, geo, rateXMinute);
         this.helmet = helmet;
     }
+
+    public Bicycle(@NonNull UUID ID, @NonNull String geo, UUID userID, double rateXMinute, Helmet helmet) {
+        super(ID, geo, userID, rateXMinute);
+        this.helmet = helmet;
+    }
 }

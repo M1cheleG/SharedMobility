@@ -19,4 +19,10 @@ public class MotoScooter extends Vehicle {
         this.plate = plate;
         this.drivingLicense = drivingLicense;
     }
+
+    public MotoScooter(@NonNull UUID ID, @NonNull String geo, UUID userID, double rateXMinute, @NonNull String plate, @NonNull DrivingLicense drivingLicense) {
+        super(ID, geo, userID, rateXMinute);
+        this.plate = plate;
+        this.drivingLicense = drivingLicense;
+    }
 }

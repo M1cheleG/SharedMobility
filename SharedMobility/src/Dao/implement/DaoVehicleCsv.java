@@ -1,10 +1,10 @@
 package Dao.implement;
 
 import Dao.DaoVehicle;
-import Model.User;
+import Model.DrivingLicense;
+import Model.Helmet;
 import Model.Vehicle;
 import Model.Vehicles.*;
-import com.sun.source.tree.Tree;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,14 +38,19 @@ public class DaoVehicleCsv implements DaoVehicle {
             String line;
             while ((line= br.readLine())!=null) {
                 String[] values =line.split(":");
-                if(values[0]=="Bicycle"){
-                }else if(values[0]=="Car"){
-                }else if(values[0]=="MotoScooter") {
-                } else if (values[0]=="Scooter") {
-                } else if (values[0]=="Van") {
+                Vehicle vehicle=null;
+                if(values[5]=="Bicycle"){
+                    vehicle= new Bicycle(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]), Helmet.valueOf(values[5]));
+                }else if(values[5]=="Car"){
+                    vehicle= new Car(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]),values[5], DrivingLicense.valueOf(values[6]));
+                }else if(values[5]=="MotoScooter") {
+                    vehicle= new MotoScooter(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]),values[5], DrivingLicense.valueOf(values[6]));
+                } else if (values[5]=="Scooter") {
+                    vehicle= new Scooter(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]), Helmet.valueOf(values[5]));
+                } else{
+                    vehicle= new Van(UUID.fromString(values[1]),values[2],UUID.fromString(values[3]),Double.valueOf(values[4]),values[5], DrivingLicense.valueOf(values[6]));
                 }
-
-
+                this.idsToVehicle.put(UUID.fromString(values[1]),vehicle);
             }
 
             }catch (IOException e){
