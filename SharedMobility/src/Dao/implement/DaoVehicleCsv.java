@@ -36,9 +36,14 @@ public class DaoVehicleCsv implements DaoVehicle {
 
         try (BufferedReader br =Files.newBufferedReader(vehicleCsv)){
             String line;
-
             while ((line= br.readLine())!=null) {
-
+                String[] values =line.split(":");
+                if(values[0]=="Bicycle"){
+                }else if(values[0]=="Car"){
+                }else if(values[0]=="MotoScooter") {
+                } else if (values[0]=="Scooter") {
+                } else if (values[0]=="Van") {
+                }
 
 
             }
@@ -69,26 +74,39 @@ public class DaoVehicleCsv implements DaoVehicle {
         return null;
     }
 
+    @Override
+    public List<Vehicle> getAll() {
+        return null;
+    }
+
     public boolean save(){
         try (BufferedWriter bw = Files.newBufferedWriter(this.vehicleCsv)) {
             for (Vehicle vehicle : idsToVehicle.values()) {
                 List<String> values = Arrays.asList(
                         vehicle.getID().toString(),
                         vehicle.getGeo(),
-                        Integer.toString(vehicle.getFuelStatus())
-                        );
-
+                        vehicle.getUserID().toString(),
+                        Integer.toString(vehicle.getFuelStatus()),
+                        Double.toString(vehicle.getRateXMinute()));
                 if(vehicle instanceof Bicycle){
-                }else if(vehicle instanceof Car){
+                    values.add("Bicycle");
+                    values.add(((Bicycle) vehicle).getHelmet().toString());
+                }else if(vehicle instanceof Car) {
+                    values.add("Car");
+                    values.add(((Car) vehicle).getPlate());
+                    values.add(String.valueOf(((Car) vehicle).getDrivingLicense()));
                 }else if(vehicle instanceof MotoScooter) {
+                    values.add("MotoScooter");
+                    values.add(((MotoScooter) vehicle).getPlate());
+                    values.add(String.valueOf(((MotoScooter) vehicle).getDrivingLicense()));
                 } else if (vehicle instanceof Scooter) {
+                    values.add("Scooter");
+                    values.add(((Scooter) vehicle).getHelmet().toString());
                 } else if (vehicle instanceof Van) {
-
+                    values.add("Van");
+                    values.add(((Van) vehicle).getPlate());
+                    values.add(String.valueOf(((Van) vehicle).getDrivingLicense()));
                 }
-
-
-
-
                 bw.write(String.join(":", values));
                 bw.newLine();
             }

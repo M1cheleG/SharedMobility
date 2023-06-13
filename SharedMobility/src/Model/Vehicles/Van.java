@@ -2,12 +2,12 @@ package Model.Vehicles;
 //modifica
 import Model.DrivingLicense;
 import Model.Vehicle;
+import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.UUID;
-
+@Getter
 public class Van extends Vehicle {
-    private String dio ="Syncron polverizzazione";
     private String plate;
     private DrivingLicense drivingLicense;
 
