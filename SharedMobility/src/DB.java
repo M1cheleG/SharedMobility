@@ -57,6 +57,16 @@ public class DB {
     public Vehicle getVehicle(UUID id) {
         return vehicleDao.get(id);
     }
+    public List<Vehicle> getAvailableVehicles() {
+        List<Vehicle> availableVehicles = new ArrayList<>();
+        for (Vehicle vehicle : vehicle) {
+            if (vehicle.isAvailable()) {
+                availableVehicles.add(vehicle);
+            }
+        }
+        return availableVehicles;
+    }
+
 }
 
 
