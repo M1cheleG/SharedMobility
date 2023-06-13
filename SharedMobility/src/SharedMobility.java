@@ -33,40 +33,71 @@ public class SharedMobility {
             }
         }
 
-        // Controllo se la patente del veicolo corrisponde alla patente dell'utente
-        if (vehicle instanceof Bicycle || vehicle instanceof Scooter) {
-            // Bicicletta e Scooter non richiedono una patente
-            vehicle.setUserID(user.getID());
-            db.updateVehicle(vehicle);
-            System.out.println("Veicolo affittato con successo.");
-            return;
-        } else if (vehicle instanceof Car) {
-            // La macchina richiede la patente B o BSSPECIAL
-            if (!user.getDrivingLicenses().contains("B") || !user.getDrivingLicenses().contains("BSSPECIAL")) {
-                System.out.println("La patente dell'utente non corrisponde alla patente del veicolo.");
+        // Controllo specifico per Scooter e Bicicletta
+        if (vehicle instanceof Scooter || vehicle instanceof Bicycle) {
+            // Controllo se l'utente possiede il casco
+            if (!user.isHelmet()) {
+                System.out.println("L'utente deve possedere un casco per noleggiare uno Scooter o una Bicicletta.");
                 return;
             }
-        } else if (vehicle instanceof MotoScooter) {
-            // Il MotoScooter richiede la patente A o ASPECIAL
-            if (!user.getDrivingLicenses().contains("A") || !user.getDrivingLicenses().contains("ASPECIAL")) {
-                System.out.println("La patente dell'utente non corrisponde alla patente del veicolo.");
-                return;
-            }
-        } else if (vehicle instanceof Van) {
-            // Il Van richiede la patente C o CSPECIAL
-            if (!user.getDrivingLicenses().contains("C") || !user.getDrivingLicenses().contains("CSPECIAL")) {
-                System.out.println("La patente dell'utente non corrisponde alla patente del veicolo.");
-                return;
+        } else {
+
+            // Controllo se la patente del veicolo corrisponde alla patente dell'utente
+            if (vehicle instanceof Car) {
+                if (!user.getDrivingLicenses().contains(DrivingLicense.B) && !user.getDrivingLicenses().contains(DrivingLicense.BSPECIAL)) {
+                    System.out.println("La patente dell'utente non corrisponde alla patente del veicolo.");
+                    return;
+                }
+            } else if (vehicle instanceof MotoScooter) {
+                if (!user.getDrivingLicenses().contains(DrivingLicense.A) && !user.getDrivingLicenses().contains(DrivingLicense.ASPECIAL)) {
+                    System.out.println("La patente dell'utente non corrisponde alla patente del veicolo.");
+                    return;
+                }
+            } else if (vehicle instanceof Van) {
+                if (!user.getDrivingLicenses().contains(DrivingLicense.C) && !user.getDrivingLicenses().contains(DrivingLicense.CSPECIAL)) {
+                    System.out.println("La patente dell'utente non corrisponde alla patente del veicolo.");
+                    return;
+                }
             }
         }
+
+        // Veicolo disponibile e utente idoneo, procedi con il noleggio
+        vehicle.setUserID(user.getID());
+        db.updateVehicle(vehicle);
+        System.out.println("Veicolo affittato con successo.");
+
 
         vehicle.setUserID(user.getID());
         db.updateVehicle(vehicle);
         System.out.println("Veicolo affittato con successo.");
     }
 
-    public void returnVehicle(Vehicle vehicle, User user) {
+    public void returnVehicle(Vehicle vehicle) {
+        // Controllo se il veicolo è stato noleggiato
+        if (vehicle.getUserID() == null) {
+            System.out.println("Il veicolo non è stato noleggiato.");
+            return;
+        }
+
+        // Cerca l'utente in base all'ID del veicolo
+        User user = null;
+        for (User u : db.getAllUsers()) {
+            if (u.getID().equals(vehicle.getUserID())) {
+                user = u;
+                break;
+            }
+        }
+
+        if (user == null) {
+            System.out.println("Impossibile trovare l'utente associato al veicolo.");
+            return;
+        }
+
+        // Rimuovi l'ID dell'utente dal veicolo
         vehicle.setUserID(null);
         db.updateVehicle(vehicle);
+
+        System.out.println("Veicolo restituito con successo.");
     }
+
 }
