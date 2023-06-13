@@ -1,5 +1,5 @@
 package Model;
 
 public enum Helmet {
-    BIKE,MOTOSCOOTER
+    BIKE,SCOOTER,NONE
 }

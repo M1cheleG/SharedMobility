@@ -2,6 +2,7 @@ package Dao.implement;
 
 import Dao.DaoUser;
 import Model.DrivingLicense;
+import Model.Helmet;
 import Model.User;
 
 import java.io.BufferedReader;
@@ -42,7 +43,7 @@ public class DaoUserCsv implements DaoUser {
                         drivingLicenses.add(DrivingLicense.valueOf(licenseValue[i]));
                 }
                 this.idsToUsers.put(UUID.fromString(values[0]),new User(UUID.fromString(values[0]),values[1],values[2], LocalDate.parse(values[3]),values[4],
-                        drivingLicenses,Boolean.getBoolean(values[6]),Double.valueOf(values[7])));
+                        drivingLicenses, Helmet.valueOf(values[6]),Double.valueOf(values[7])));
             }
 
         }catch (IOException e){
@@ -94,7 +95,7 @@ public class DaoUserCsv implements DaoUser {
                         user.getDateOfBirth().toString(),
                         user.getCF(),
                         user.getDrivingLicenses().toString(),
-                        Boolean.toString(user.isHelmet()),
+                        user.getHelmet().toString(),
                         Double.toString(user.getCredit())
                         );
 

@@ -18,8 +18,9 @@ public class SharedMobility {
         db.addVehicle(vehicle);
     }
 
-    public void addCreditUser(User user,int credit){
-        user.setCredit(user.getCredit()+credit);
+    public void addCreditUser(User test,int credit){
+        User user=db.getUser(test.getID());
+        user.setCredit((user.getCredit())+credit);
         db.updateUser(user);
     }
 
@@ -27,7 +28,9 @@ public class SharedMobility {
         return db.getAvailableVehicles();
     }
 
-    public void rentVehicle(Vehicle vehicle, User user,int minute) {
+    public void rentVehicle(Vehicle testVehicle, User testUser,int minute) {
+        User user=db.getUser(testUser.getID());
+        Vehicle vehicle=db.getVehicle(testVehicle.getID());
 
         //Controllo del tempo
         if(minute<=5){
@@ -58,9 +61,16 @@ public class SharedMobility {
         // Controllo specifico per Scooter e Bicicletta
         if (vehicle instanceof Scooter || vehicle instanceof Bicycle) {
             // Controllo se l'utente possiede il casco
-            if (!user.isHelmet()) {
-                System.out.println("L'utente deve possedere un casco per noleggiare uno Scooter o una Bicicletta.");
-                return;
+            if(vehicle instanceof Scooter) {
+                if (!user.getHelmet().equals(Helmet.SCOOTER)) {
+                    System.out.println("L'utente deve possedere un casco per noleggiare uno Scooter.");
+                    return;
+                }
+            }else{
+                if(!user.getHelmet().equals(Helmet.BIKE)){
+                    System.out.println("L'utente deve possedere un casco per noleggiare una Bicicletta.");
+                    return;
+                }
             }
         } else {
 
@@ -92,8 +102,9 @@ public class SharedMobility {
 
     }
 
-    public void returnVehicle(Vehicle vehicle) {
+    public void returnVehicle(Vehicle test) {
         // Controllo se il veicolo è stato noleggiato
+        Vehicle vehicle=db.getVehicle(test.getID());
         if (vehicle.getUserID() == null) {
             System.out.println("Il veicolo non è stato noleggiato.");
             return;

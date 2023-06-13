@@ -23,11 +23,11 @@ public class User {
     @NonNull
     private String CF;
     private List<DrivingLicense> DrivingLicenses;
-    private boolean helmet;
+    private Helmet helmet;
     private double credit = 0;
 
     public User(UUID ID, @NonNull String name, @NonNull String surname, @NonNull LocalDate dateOfBirth,
-                @NonNull String CF,  List<DrivingLicense> drivingLicenses, boolean helmet, double credit) {
+                @NonNull String CF,  List<DrivingLicense> drivingLicenses, Helmet helmet, double credit) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
