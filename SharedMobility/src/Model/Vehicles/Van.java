@@ -11,7 +11,7 @@ public class Van extends Vehicle {
     private String plate;
     private DrivingLicense drivingLicense;
 
-    protected Van(@NonNull UUID ID, @NonNull String geo,
+    public Van(@NonNull UUID ID, @NonNull String geo,
                   double rateXMinute,String plate,DrivingLicense drivingLicense) {
         super(ID, geo, rateXMinute);
         this.plate = plate;

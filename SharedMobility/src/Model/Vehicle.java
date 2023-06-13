@@ -16,7 +16,7 @@ public abstract class  Vehicle {
     private int fuelStatus = 100;
     private double rateXMinute;
 
-    protected Vehicle(@NonNull UUID ID, @NonNull String geo, double rateXMinute) {
+    public Vehicle(@NonNull UUID ID, @NonNull String geo, double rateXMinute) {
         this.ID = ID;
         this.geo = geo;
         this.rateXMinute = rateXMinute;
