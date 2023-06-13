@@ -60,13 +60,12 @@ public class DB {
     public List<Vehicle> getAvailableVehicles() {
         List<Vehicle> availableVehicles = new ArrayList<>();
         for (Vehicle vehicle : vehicle) {
-            if (vehicle.isAvailable()) {
+            if (vehicle.getUser() == null) {
                 availableVehicles.add(vehicle);
             }
         }
         return availableVehicles;
     }
-
 }
 
 
