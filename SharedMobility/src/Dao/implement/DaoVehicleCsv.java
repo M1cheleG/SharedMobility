@@ -72,7 +72,12 @@ public class DaoVehicleCsv implements DaoVehicle {
     public boolean save(){
         try (BufferedWriter bw = Files.newBufferedWriter(this.vehicleCsv)) {
             for (Vehicle vehicle : idsToVehicle.values()) {
-                List<String> temp = Arrays.asList();
+                List<String> values = Arrays.asList(
+                        vehicle.getID().toString(),
+                        vehicle.getGeo(),
+                        Integer.toString(vehicle.getFuelStatus())
+                        );
+
                 if(vehicle instanceof Bicycle){
                 }else if(vehicle instanceof Car){
                 }else if(vehicle instanceof MotoScooter) {
@@ -80,7 +85,6 @@ public class DaoVehicleCsv implements DaoVehicle {
                 } else if (vehicle instanceof Van) {
 
                 }
-                List<String> values = Arrays.asList();
 
 
 
