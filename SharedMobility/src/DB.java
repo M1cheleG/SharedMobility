@@ -1,6 +1,7 @@
 import Dao.DaoUser;
 import Dao.DaoVehicle;
 import Dao.implement.DaoUserCsv;
+import Dao.implement.DaoVehicleCsv;
 import Model.User;
 import Model.Vehicle;
 
@@ -21,6 +22,7 @@ public class DB {
         user = new ArrayList<>();
         vehicle = new ArrayList<>();
         userDao = new DaoUserCsv(Paths.get("SharedMobility","src","Dao","implement","users.csv"));
+        vehicleDao = new DaoVehicleCsv(Paths.get("ShareMobility"),"src", "Dao", "implement", "vehicle.csv");
     }
 
     public static DB getInstance(){
