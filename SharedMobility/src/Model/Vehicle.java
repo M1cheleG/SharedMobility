@@ -6,22 +6,24 @@ import lombok.NonNull;
 import java.util.Collection;
 import java.util.UUID;
 @Getter
-public abstract class Vehicle {
+public abstract class  Vehicle {
     @NonNull
     private UUID ID;
     @NonNull
     private String geo;
     @NonNull
-    private boolean isAvailable;
+    private User user;
     private int fuelStatus = 100;
     private double rateXMinute;
 
-    protected Vehicle(@NonNull UUID ID, @NonNull String geo, @NonNull boolean isAvailable, double rateXMinute) {
+    protected Vehicle(@NonNull UUID ID, @NonNull String geo, double rateXMinute) {
         this.ID = ID;
         this.geo = geo;
-        this.isAvailable = isAvailable;
         this.rateXMinute = rateXMinute;
+        this.user = null;
     }
 
 
+    public void setUser(User user) {
+    }
 }
