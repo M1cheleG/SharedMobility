@@ -12,7 +12,7 @@ public abstract class  Vehicle {
     @NonNull
     private String geo;
     @NonNull
-    private User user;
+    private UUID userID;
     private int fuelStatus = 100;
     private double rateXMinute;
 
@@ -20,7 +20,7 @@ public abstract class  Vehicle {
         this.ID = ID;
         this.geo = geo;
         this.rateXMinute = rateXMinute;
-        this.user = null;
+        this.userID = null;
     }
 
 
