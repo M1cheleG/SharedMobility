@@ -22,8 +22,7 @@ public abstract class  Vehicle {
         this.rateXMinute = rateXMinute;
         this.userID = null;
     }
-
-
-    public void setUser(User user) {
+    public void setUserID(UUID userID) {
+        this.userID = userID;
     }
 }
