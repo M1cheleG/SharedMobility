@@ -17,5 +17,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="lombok" level="project" />
+    <orderEntry type="library" name="postgresql-42.6.0" level="project" />
   </component>
 </module>

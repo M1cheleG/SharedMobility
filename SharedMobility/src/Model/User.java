@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +39,7 @@ public class User {
         this.helmet = helmet;
         this.credit = credit;
     }
+
 
     @Override
     public String toString() {

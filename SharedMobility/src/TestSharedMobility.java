@@ -1,14 +1,9 @@
-import Dao.DaoUser;
-import Dao.DaoVehicle;
-import Dao.implement.DaoUserCsv;
-import Dao.implement.DaoVehicleCsv;
 import Model.DrivingLicense;
 import Model.Helmet;
 import Model.User;
 import Model.Vehicle;
 import Model.Vehicles.*;
 
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -37,8 +32,8 @@ public class TestSharedMobility {
         app.addVehicle(veicolo2);
         app.addVehicle(veicolo3);
         app.addVehicle(veicolo4);
-        app.addVehicle(veicolo5);
-        */
+        app.addVehicle(veicolo5); */
+
 
         app.addCreditUser(user3,150);
         app.returnVehicle(veicolo4);
