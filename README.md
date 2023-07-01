@@ -1,4 +1,7 @@
 # SharedMobility
+# Esercizio di gruppo
+Ci è stato richiesto di progettare questa app lavorando in team
+
 
 <p align="center">
 <img src="https://enjoy.eni.com/social_tagging_1200x630.jpg" class="center">
